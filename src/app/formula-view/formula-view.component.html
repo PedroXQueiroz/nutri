@@ -1,0 +1,39 @@
+<ion-card>
+  <ion-card-header>
+    <div>
+      <ion-card-title>{{formula.name}}</ion-card-title>
+      <ion-card-subtitle>{{formula.description}}</ion-card-subtitle>
+    </div>
+    
+    <ion-icon [name]="paramsIsOpen ? 'arrow-dropup':'arrow-dropdown'" (click)="toggleParams()"></ion-icon>
+    <!-- <ion-icon *ngIf="!paramsIsOpen" name="arrow-dropdown" (click)="toggleParams()"></ion-icon> -->
+  </ion-card-header>
+
+  <app-accordion [toggleEvent]="toggleEvent">
+
+    <ion-card-content>
+      <ion-grid>
+        <div *ngFor="let param of formulaParams" size="4">
+          <ion-item *ngIf="param.type.toString() == 'NUMERAL'">
+            <ion-label position="floating">{{param.name}}</ion-label>
+            <ion-input type="number" (change)="setParamValue(param, $event.target.value)"></ion-input>
+          </ion-item>
+          <ion-item  *ngIf="param.type.toString() == 'GENDER'">
+              <ion-label position="floating">{{param.name}}</ion-label>
+  
+              <ion-select (ionChange)="setParamValue(param, $event.target.value)">
+                <ion-select-option value="MALE">Masculino</ion-select-option>
+                <ion-select-option value="FEMALE">Feminino</ion-select-option>
+              </ion-select>
+          </ion-item>
+        </div>
+      </ion-grid>
+    </ion-card-content>
+
+    <ion-row class="footer">
+      <ion-button (click)="calculate()">Calcular</ion-button>
+      <span class="result">{{result ? result.toString().substring(0, 5) : ''}}</span>
+    </ion-row>
+    
+  </app-accordion>
+</ion-card>

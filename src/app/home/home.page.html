@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Nutri
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="formulas-container-h">
+    <div class="formulas-container-v">
+      <app-formula-view *ngFor="let formula of formulas" [formula]="formula"></app-formula-view>
+    </div>
+  </div>
+</ion-content>

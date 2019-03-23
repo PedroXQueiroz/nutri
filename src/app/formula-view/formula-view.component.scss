@@ -1,0 +1,24 @@
+ion-card{
+    max-width: 25rem;
+}
+
+ion-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-card-header ion-icon{
+    font-size: 2rem;
+}
+
+ion-card .footer{
+    min-height: 2rem;
+    padding: 1rem;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-card .footer .result{
+    font-size: 2.5rem;
+}
