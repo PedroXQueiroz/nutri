@@ -42,7 +42,7 @@ export class FormulaViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._formulaParams = this.formula.paramsData;
+    this._formulaParams = this.formula.getParamsData();
     this._toggleEvent = new EventEmitter();
   }
   

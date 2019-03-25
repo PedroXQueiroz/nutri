@@ -32,7 +32,7 @@ export default abstract class Formula{
 
     public abstract calculate():number;
 
-    get paramsData():ParamMetaData[]{
+    public getParamsData():ParamMetaData[]{
         let formulaProps:string[] = Object.keys(this);
         let formulaParmas:ParamMetaData[] = formulaProps
             .map(prop =>Reflect.getMetadata(paramMetadataKey, this, prop))

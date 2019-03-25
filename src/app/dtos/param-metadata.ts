@@ -1,4 +1,5 @@
 import { ParamType } from '../constants/param-type';
+import { Gender } from '../constants/gender';
 
 export default class ParamaMetaData{
     
@@ -17,5 +18,25 @@ export default class ParamaMetaData{
 
     get type():ParamType{
         return this._type;
+    }
+
+    private _value:number|Gender;
+
+    get value():number|Gender{
+        return this._value;
+    }
+
+    set value(value: number|Gender){
+        this._value = value;
+    }
+
+    private _expressionId:string;
+
+    get expressionId():string{
+        return this._expressionId;
+    }
+
+    set expressionId(id:string){
+        this._expressionId = id;
     }
 }

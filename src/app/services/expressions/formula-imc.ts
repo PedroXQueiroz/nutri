@@ -1,7 +1,7 @@
-import Formula from './formula';
-import {param} from '../decorators/param-decorator';
-import { ParamType } from '../constants/param-type';
-import { Gender } from '../constants/gender';
+import Formula from '../formula';
+import {param} from '../../decorators/param-decorator';
+import { ParamType } from '../../constants/param-type';
+import { Gender } from '../../constants/gender';
 
 export default class FormulaIMC extends Formula {
     

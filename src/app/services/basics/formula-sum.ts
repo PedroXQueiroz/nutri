@@ -1,6 +1,6 @@
-import Formula from './formula';
-import { param } from '../decorators/param-decorator';
-import { ParamType } from '../constants/param-type';
+import Formula from '../formula';
+import { param } from '../../decorators/param-decorator';
+import { ParamType } from '../../constants/param-type';
 
 export default class FormulaSoma extends Formula {
  

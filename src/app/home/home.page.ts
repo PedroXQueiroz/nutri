@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Formula from '../services/formula';
-import FormulaSoma from '../services/formula-soma';
-import FormulaIMC from '../services/formula-imc';
+import FormulaSoma from '../services/basics/formula-sum';
+import FormulaIMC from '../services/expressions/formula-imc';
 
 @Component({
   selector: 'app-home',
