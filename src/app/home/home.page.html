@@ -7,9 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="formulas-container-h">
-    <div class="formulas-container-v">
-      <app-formula-view *ngFor="let formula of formulas" [formula]="formula"></app-formula-view>
-    </div>
+  <div class="formulas-container">
+    <app-formula-view *ngFor="let formula of formulas" [formula]="formula"></app-formula-view>
   </div>
 </ion-content>
