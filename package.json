@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron-serve": "ng build --prod && electron ."
+    "electron-serve": "ng build --prod && electron .",
+    "windows-release": "electron-packager . nutri --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Murti'"
   },
   "private": true,
   "dependencies": {
