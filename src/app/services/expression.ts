@@ -3,6 +3,7 @@ import ParamMetaData from '../dtos/param-metadata';
 import { ParamType } from '../constants/param-type';
 import Utils from '../utils';
 import { Gender } from '../constants/gender';
+import { all } from 'q';
 
 export default class Expression extends Formula {
     
@@ -43,45 +44,71 @@ export default class Expression extends Formula {
 
     get unsatisfiedParams():ParamMetaData[]{
 
-        let params:ParamMetaData[] = this._executes.getParamsData();
+        let unsatifiedParams:ParamMetaData[] = this._executes.getParamsData();
         
-        if(this.hasRequirements){
-
-            for(let paramName in this._requires){
-                let paramIndex = params.findIndex(currentParam => currentParam.name == paramName);               
-
-                if(paramIndex != -1){
-                    params = params.splice(paramIndex, 1);
+        if(this.hasRequirements)
+        {
+            this._requires.forEach((param, paramName) => {
+             
+                let paramIndex = unsatifiedParams.findIndex(currentParam => currentParam.name == paramName);
+                
+                if (paramIndex != -1) {
+                    unsatifiedParams = unsatifiedParams.splice(paramIndex, 1);
                 }
-            }
-
+                
+                if(param instanceof Expression) {
+                    unsatifiedParams.concat(param.allUnsatifiedParams);
+                }else{
+                    unsatifiedParams.concat(param.getParamsData());
+                }
+                
+            });
         }
 
-        return params;
+        return unsatifiedParams;
 
     }
-    
+   
     get allUnsatifiedParams():ParamMetaData[]{
 
         let allParams:ParamMetaData[] = this.unsatisfiedParams;
+        
+        console.log('this executes params:' + allParams.length);
 
         if(this.hasRequirements){
+            
             this._requires.forEach(requirement => {
+                
                 if(requirement instanceof Expression){
-                    allParams.concat(requirement.allUnsatifiedParams);
+                    allParams = allParams.concat(requirement.allUnsatifiedParams);
+                }else{
+                    allParams = allParams.concat(requirement.getParamsData());
                 }
             })
         }
 
-        return allParams;
+        console.log('total params:' + allParams.length);
 
+        return allParams;
     }
 
     public getParamsData():ParamMetaData[]{
-        const params = super.getParamsData();
+            
+        let adjustedParams:ParamMetaData[] = [];
+        
+        if(this._executes instanceof Expression){
+            
+            this._executes._requires.forEach((exp) => {
 
-        let adjustedParams:ParamMetaData[] = params.map(param => { param.expressionId = this._id; return param });
+                adjustedParams = adjustedParams.concat(exp.getParamsData());
 
+            })
+        
+        }else{
+            const params = Formula.getParamsDataFrom(this._executes);
+    
+            adjustedParams = params.map(param => { param.expressionId = this._id; return param });
+        }
         return adjustedParams;
     }
 

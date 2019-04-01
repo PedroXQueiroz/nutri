@@ -18,10 +18,7 @@ export default class FormulaSoma extends Formula {
     public second:number;
     
     calculate(): number {
-        let num1 = this.first;
-        let num2 = this.second;
-
-        return num1 + num2;
+        return this.first + this.second;
     }
 
 }

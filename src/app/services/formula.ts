@@ -32,13 +32,17 @@ export default abstract class Formula{
 
     public abstract calculate():number;
 
-    public getParamsData():ParamMetaData[]{
-        let formulaProps:string[] = Object.keys(this);
+    protected static getParamsDataFrom(formula: Formula){
+        const formulaProps = Object.keys(formula);
         let formulaParmas:ParamMetaData[] = formulaProps
-            .map(prop =>Reflect.getMetadata(paramMetadataKey, this, prop))
+            .map(prop =>Reflect.getMetadata(paramMetadataKey, formula, prop))
             .filter(param => param);
 
         return formulaParmas;
+    }
+
+    public getParamsData():ParamMetaData[]{
+        return Formula.getParamsDataFrom(this);
     }
 
     setParam(param:ParamMetaData, value:number|Gender){

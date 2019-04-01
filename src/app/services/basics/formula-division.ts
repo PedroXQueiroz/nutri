@@ -6,6 +6,9 @@ export default class FormulaDivision extends Formula {
     
     constructor(){
         super('Divisão', 'Divide o primeiro pelo segundo número');
+
+        this.numerator = 0;
+        this.denominator = 0;
     }
     
     @param("numerador", ParamType.NUMERAL)
