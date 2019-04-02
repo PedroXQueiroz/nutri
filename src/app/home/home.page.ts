@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Formula from '../services/formula';
 import FormulaSoma from '../services/formula-soma';
 import FormulaIMC from '../services/formula-imc';
+import { Pollock7Dobras } from '../services/pollock-7-dobras';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomePage implements OnInit{
     this._formulas = new Array();
     this._formulas.push(new FormulaSoma());
     this._formulas.push(new FormulaIMC());
+    this._formulas.push(new Pollock7Dobras())
   }
   
 }

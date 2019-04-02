@@ -21,8 +21,8 @@ export class FormulaViewComponent implements OnInit {
 
   private _result:number;
 
-  get result():number{
-    return this._result;
+  get result():Number{
+    return this._result ? new Number(this._result.toFixed(2)) : null;
   }
 
   private _toggleEvent:EventEmitter;
