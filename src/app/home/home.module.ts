@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { FormulaViewComponent } from '../formula-view/formula-view.component';
 import { AccordionComponent } from '../accordion/accordion.component';
+import { ClipboardPage } from '../clipboard/clipboard.page';
+import { PopoverPasteValueComponent } from '../popover-paste-value/popover-paste-value.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { AccordionComponent } from '../accordion/accordion.component';
   declarations: [
     HomePage, 
     FormulaViewComponent,
-    AccordionComponent
-  ]
+    AccordionComponent,
+    PopoverPasteValueComponent
+  ],
+  entryComponents: [PopoverPasteValueComponent]
 })
 export class HomePageModule {}

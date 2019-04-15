@@ -16,7 +16,9 @@
         <div *ngFor="let param of formulaParams" size="4">
           <ion-item *ngIf="param.type.toString() == 'NUMERAL'">
             <ion-label position="floating">{{param.name}}</ion-label>
-            <ion-input type="number" (change)="setParamValue(param, $event.target.value)"></ion-input>
+            <ion-input type="number" (change)="setParamValue(param, $event.target.value)" [value]="getValueParam(param)">
+                <ion-icon name="clipboard" (click)="getFromClipboard(param)"></ion-icon>
+            </ion-input>
           </ion-item>
           <ion-item  *ngIf="param.type.toString() == 'GENDER'">
               <ion-label position="floating">{{param.name}}</ion-label>
@@ -32,8 +34,12 @@
 
     <ion-row class="footer">
       <ion-button (click)="calculate()">Calcular</ion-button>
-      <span class="result">{{result ? result.toString().substring(0, 5) : ''}}</span>
+      <span class="result">{{result}}</span>
     </ion-row>
+
+    <div class="ion-footer" *ngIf="result">
+        <ion-icon name="copy" (click)="sendToClipboard()"></ion-icon>
+    </div>
     
   </app-accordion>
 </ion-card>
