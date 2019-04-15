@@ -10,10 +10,10 @@ export class PesoIdeal extends Formula{
     }
     
     @param('Massa Magra', ParamType.NUMERAL)
-    public massaMagra:number = 0;
+    public massaMagra:number = null;
 
     @param('Gênero', ParamType.GENDER)
-    public gender:Gender = Gender.MALE;
+    public gender:Gender = null;
 
     public calculate(): number {
         return this.gender == Gender.MALE ?

@@ -6,16 +6,13 @@ export default class FormulaSoma extends Formula {
  
     constructor(){
         super('Soma', 'Soma dois números');
-
-        this.first = 0;
-        this.second = 0;
     }
     
     @param('primeiro', ParamType.NUMERAL)
-    public first:number;
+    public first:number = null;
 
     @param('segundo', ParamType.NUMERAL)
-    public second:number;
+    public second:number = null;
     
     calculate(): number {
         let num1 = this.first;

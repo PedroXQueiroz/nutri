@@ -56,4 +56,17 @@ export default abstract class Formula{
                 }
             })
     }
+
+    getParamValue(param:ParamMetaData){
+
+        let formulaProps:string[] = Object.keys(this);
+
+        let paramName:string = formulaProps.find(prop => {
+            let currentParamName:ParamMetaData = Reflect.getMetadata(paramMetadataKey, this, prop);
+
+            return currentParamName && currentParamName.name == param.name                
+        });
+
+        return this[paramName];
+    }   
 };

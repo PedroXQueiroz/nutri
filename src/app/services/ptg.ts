@@ -9,7 +9,7 @@ export class PesoTecidoGorduroso extends Formula{
     }
 
     @param('Porcentagem de gordura corporal', ParamType.NUMERAL)
-    public gorduralCorporal:number = 0;
+    public gorduralCorporal:number = null;
 
     public calculate(): number {
         return this.gorduralCorporal * 100;

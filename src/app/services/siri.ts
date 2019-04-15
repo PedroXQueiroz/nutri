@@ -10,7 +10,7 @@ export class Siri extends Formula{
     }
     
     @param('Densidade Corporal', ParamType.NUMERAL)
-    public corporalDensity:number = 0;
+    public corporalDensity:number = null;
 
     public calculate(): number {
         const fisrtPart = 4.95 / this.corporalDensity; 

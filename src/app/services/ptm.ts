@@ -9,10 +9,10 @@ export class PesoTecidoMuscular extends Formula{
     }
 
     @param('Peso tecido gorduroso', ParamType.NUMERAL)
-    public pesoTecidoGorduroso:number = 0;
+    public pesoTecidoGorduroso:number = null;
 
     @param('Peso', ParamType.NUMERAL)
-    public peso:number = 0;
+    public peso:number = null;
     
     public calculate(): number {
         return this.peso - this.pesoTecidoGorduroso;
