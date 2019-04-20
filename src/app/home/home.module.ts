@@ -26,8 +26,10 @@ import { PopoverPasteValueComponent } from '../popover-paste-value/popover-paste
     HomePage, 
     FormulaViewComponent,
     AccordionComponent,
-    PopoverPasteValueComponent
+    PopoverPasteValueComponent,
+    ClipboardPage
   ],
-  entryComponents: [PopoverPasteValueComponent]
+  bootstrap:[ClipboardPage],
+  entryComponents: [PopoverPasteValueComponent, ClipboardPage]
 })
 export class HomePageModule {}

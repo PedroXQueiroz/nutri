@@ -8,6 +8,7 @@ import { PesoTecidoGorduroso } from '../services/ptg';
 import { PesoTecidoMuscular } from '../services/ptm';
 import { PesoIdeal } from '../services/peso-ideal';
 import { PesoExcesso } from '../services/peso-excesso';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,14 @@ export class HomePage implements OnInit{
   
   get formulas():Formula[]{
     return this._formulas;
+  }
+
+  constructor(private _menuCtrl:MenuController){
+    this._menuCtrl.enable(true, 'clipboard');
+  }
+
+  openClipboard(){
+    this._menuCtrl.open('clipboard')
   }
   
   ngOnInit(): void {

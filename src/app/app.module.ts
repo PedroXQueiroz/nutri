@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClipboardPage } from './clipboard/clipboard.page';
 
 @NgModule({
-  declarations: [AppComponent, ClipboardPage],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [

@@ -1,14 +1,28 @@
 <ion-header>
-  
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button auto-hide="false" menu="clipboard" (click)="openClipboard()"></ion-menu-button>
     </ion-buttons>
     <ion-title>
       Nutri
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-menu side="start" menuId="clipboard" contentId="clipboard_content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Prancheta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+    <app-clipboard></app-clipboard>
+  </ion-content>
+
+  <ion-content id="clipboard_content"></ion-content>
+
+</ion-menu>
 
 <ion-content padding>
   <div class="formulas-container">

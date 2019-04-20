@@ -75,10 +75,11 @@ export class FormulaViewComponent implements OnInit {
     ClipboardPage.addValue(value);
   }
 
-  async getFromClipboard(param:ParamaMetaData){
+  async getFromClipboard(ev, param:ParamaMetaData){
     let popover = await this._popover.create({
       component: PopoverPasteValueComponent,
-      // event: ev,
+      event: ev,
+      mode:'ios',
       translucent: true
     })
     
@@ -86,8 +87,19 @@ export class FormulaViewComponent implements OnInit {
     
     let dismissResponse = await popover.onDidDismiss();
 
-    this._ngZone.run(() => {
-      this.formula.setParam(param, dismissResponse.data);
-    })
+    if(dismissResponse.data)
+    {
+      this._ngZone.run(() => {
+        this.formula.setParam(param, dismissResponse.data);
+      })
+    }
+  }
+
+  clear(){
+    this._formulaParams.forEach(param => {
+      this.formula.setParam(param, null);
+    });
+
+    this._result = null;
   }
 }

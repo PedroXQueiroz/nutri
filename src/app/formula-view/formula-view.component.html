@@ -4,7 +4,7 @@
       <ion-card-title>{{formula.name}}</ion-card-title>
       <ion-card-subtitle>{{formula.description}}</ion-card-subtitle>
     </div>
-    
+
     <ion-icon [name]="paramsIsOpen ? 'arrow-dropup':'arrow-dropdown'" (click)="toggleParams()"></ion-icon>
     <!-- <ion-icon *ngIf="!paramsIsOpen" name="arrow-dropdown" (click)="toggleParams()"></ion-icon> -->
   </ion-card-header>
@@ -16,17 +16,18 @@
         <div *ngFor="let param of formulaParams" size="4">
           <ion-item *ngIf="param.type.toString() == 'NUMERAL'">
             <ion-label position="floating">{{param.name}}</ion-label>
-            <ion-input type="number" (change)="setParamValue(param, $event.target.value)" [value]="getValueParam(param)">
-                <ion-icon name="clipboard" (click)="getFromClipboard(param)"></ion-icon>
+            <ion-input type="number" (change)="setParamValue(param, $event.target.value)"
+              [value]="getValueParam(param)">
+              <ion-icon name="clipboard" (click)="getFromClipboard($event, param)"></ion-icon>
             </ion-input>
           </ion-item>
-          <ion-item  *ngIf="param.type.toString() == 'GENDER'">
-              <ion-label position="floating">{{param.name}}</ion-label>
-  
-              <ion-select (ionChange)="setParamValue(param, $event.target.value)">
-                <ion-select-option value="MALE">Masculino</ion-select-option>
-                <ion-select-option value="FEMALE">Feminino</ion-select-option>
-              </ion-select>
+          <ion-item *ngIf="param.type.toString() == 'GENDER'">
+            <ion-label position="floating">{{param.name}}</ion-label>
+
+            <ion-select (ionChange)="setParamValue(param, $event.target.value)">
+              <ion-select-option value="MALE">Masculino</ion-select-option>
+              <ion-select-option value="FEMALE">Feminino</ion-select-option>
+            </ion-select>
           </ion-item>
         </div>
       </ion-grid>
@@ -37,9 +38,12 @@
       <span class="result">{{result}}</span>
     </ion-row>
 
-    <div class="ion-footer" *ngIf="result">
-        <ion-icon name="copy" (click)="sendToClipboard()"></ion-icon>
+    <hr>
+
+    <div class="ion-footer">
+      <ion-icon name="sync" (click)="clear()"></ion-icon>
+      <ion-icon name="copy" (click)="sendToClipboard()" *ngIf="result"></ion-icon>
     </div>
-    
+
   </app-accordion>
 </ion-card>

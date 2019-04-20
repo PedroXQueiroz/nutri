@@ -27,3 +27,15 @@ ion-card ion-input ion-icon{
     right:1.5rem;
     position: absolute;
 }
+
+hr{
+    background: var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.13))));
+}
+
+.ion-footer{
+    padding: 1rem;
+}
+
+.ion-footer ion-icon{
+    font-size:35px;
+}
