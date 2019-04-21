@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClipboardValue } from '../dtos/clipboard-value';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-clipboard',
@@ -19,8 +19,11 @@ export class ClipboardPage implements OnInit {
 
   private static _alertCtrl:AlertController;
 
-  constructor(private _alertCtrl:AlertController){
+  private static _toastCtrl: ToastController;
+
+  constructor(private _alertCtrl:AlertController, private _toastCtrl: ToastController){
     ClipboardPage._alertCtrl = this._alertCtrl;
+    ClipboardPage._toastCtrl = this._toastCtrl;
   }
   
   removeValue(value:ClipboardValue){
@@ -70,12 +73,15 @@ export class ClipboardPage implements OnInit {
                         
                         let overrideConfirmed:boolean = false;
 
+                        let valueIndex = valuesPositions[valueSelectedIndex];
+                        let currentValueSelected = ClipboardPage._values[valueIndex]
+
                         let overrideValueAlert = await this._alertCtrl.create({
                           header: 'Novo nome para o valor',
-                          message: 'Qual o novo nome será atribuído á ',
+                          message: 'Qual o novo nome será atribuído á ' + currentValueSelected.name,
                           inputs: [{
                             name: 'overrideInput',
-                            placeholder: 'isso deve ser texto'
+                            placeholder: 'Novo nome'
                           }],
                           buttons:[
                             {
@@ -98,8 +104,14 @@ export class ClipboardPage implements OnInit {
                           console.log(ClipboardPage.overrideValuePosition);
 
                           value.name = overrideValueResponse.data.values.overrideInput;
-                          let valueIndex = valuesPositions[valueSelectedIndex];
                           ClipboardPage._values[valueIndex] = value;
+
+                          let toast = await ClipboardPage._toastCtrl.create({
+                            message: 'Valor substituído',
+                            duration: 2000
+                          })
+            
+                          toast.present();
                         }
                       }
                     },{
@@ -122,9 +134,16 @@ export class ClipboardPage implements OnInit {
           }, 
           { 
             text: 'Adicionar novo',
-            handler: () => {
+            handler: async () => {
               value.name += " (" + ( valuesPositions.length ) +")";
               ClipboardPage._values.push(value);
+
+              let toast = await ClipboardPage._toastCtrl.create({
+                message: 'Valor adicionado',
+                duration: 2000
+              })
+
+              toast.present();
             }
           }, 
           'Cancelar'
@@ -137,6 +156,13 @@ export class ClipboardPage implements OnInit {
     }
     
     ClipboardPage._values.push(value);
+
+    let toast = await ClipboardPage._toastCtrl.create({
+      message: 'Valor adicionado',
+      duration: 2000
+    })
+
+    toast.present();
   }
   
   static value(name: string): Number {
