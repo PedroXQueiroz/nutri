@@ -10,31 +10,31 @@ export class Pollock7Dobras extends Formula{
     }
 
     @param('SE', ParamType.NUMERAL)
-    public se:number = 0;
+    public se:number = null;
 
     @param('Axilar Média', ParamType.NUMERAL)
-    public axilarMedia:number = 0;
+    public axilarMedia:number = null;
 
     @param('Triceps', ParamType.NUMERAL)
-    public triceps:number = 0;
+    public triceps:number = null;
 
     @param('Coxa', ParamType.NUMERAL)
-    public coxa:number = 0;
+    public coxa:number = null;
 
     @param('SI', ParamType.NUMERAL)
-    public si:number = 0;
+    public si:number = null;
 
     @param('Abdomên', ParamType.NUMERAL)
-    public abdomen:number = 0;
+    public abdomen:number = null;
 
     @param('Peitoral/Tórax', ParamType.NUMERAL)
-    public peitoral:number = 0;
+    public peitoral:number = null;
 
     @param('Idade', ParamType.NUMERAL)
-    public age:number = 0;
+    public age:number = null;
 
     @param('Gênero', ParamType.GENDER)
-    public gender:Gender = Gender.MALE;
+    public gender:Gender = null;
     
     public calculate(): number {
         let somatorioDobras =   this.se + 

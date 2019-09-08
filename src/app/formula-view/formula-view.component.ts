@@ -1,13 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import Formula from '../services/formula';
 import { EventEmitter } from 'events';
 import ParamaMetaData from '../dtos/param-metadata';
 import { ParamType } from '../constants/param-type';
+import { ClipboardPage } from '../clipboard/clipboard.page';
+import { ClipboardValue } from '../dtos/clipboard-value';
+import { PopoverController } from '@ionic/angular';
+import { PopoverPasteValueComponent } from '../popover-paste-value/popover-paste-value.component';
 
 @Component({
   selector: 'app-formula-view',
   templateUrl: './formula-view.component.html',
-  styleUrls: ['./formula-view.component.scss'],
+  styleUrls: ['./formula-view.component.scss']
 })
 export class FormulaViewComponent implements OnInit {
 
@@ -17,6 +21,10 @@ export class FormulaViewComponent implements OnInit {
 
   get formulaParams():ParamaMetaData[]{
     return this._formulaParams;
+  }
+
+  public getValueParam(param:ParamaMetaData){
+    return this.formula.getParamValue(param);
   }
 
   private _result:number;
@@ -37,7 +45,7 @@ export class FormulaViewComponent implements OnInit {
     return this._paramsIsOpen;
   }
   
-  constructor() { 
+  constructor(private _popover: PopoverController, private _ngZone:NgZone) { 
     
   }
 
@@ -57,5 +65,50 @@ export class FormulaViewComponent implements OnInit {
 
   calculate(){
     this._result = this.formula.calculate();
+  }
+
+  sendToClipboard(){
+    let value:ClipboardValue = new ClipboardValue();
+    value.name = this.formula.name;
+    value.value = this.result;
+
+    ClipboardPage.addValue(value);
+  }
+
+  async getFromClipboard(ev, param:ParamaMetaData){
+    let popover = await this._popover.create({
+      component: PopoverPasteValueComponent,
+      event: ev,
+      mode:'ios',
+      translucent: true
+    })
+    
+    await popover.present();
+    
+    let dismissResponse = await popover.onDidDismiss();
+
+    if(dismissResponse.data)
+    {
+      this._ngZone.run(() => {
+        this.formula.setParam(param, dismissResponse.data);
+      })
+    }
+  }
+
+  setOnClipboard(ev, param:ParamaMetaData)
+  {
+    let value:ClipboardValue = new ClipboardValue();
+    value.name = param.name;
+    value.value = this.getValueParam(param);
+
+    ClipboardPage.addValue(value);
+  }
+
+  clear(){
+    this._formulaParams.forEach(param => {
+      this.formula.setParam(param, null);
+    });
+
+    this._result = null;
   }
 }

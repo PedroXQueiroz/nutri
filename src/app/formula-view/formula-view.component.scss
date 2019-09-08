@@ -22,3 +22,42 @@ ion-card .footer{
 ion-card .footer .result{
     font-size: 2.5rem;
 }
+
+ion-card ion-input ion-icon{
+    right:1.5rem;
+    position: absolute;
+}
+
+hr{
+    background: var(--ion-item-border-color,var(--ion-border-color,var(--ion-color-step-150,rgba(0,0,0,0.13))));
+}
+
+.ion-footer{
+    padding: 1rem;
+}
+
+.ion-footer ion-icon{
+    font-size:35px;
+}
+
+.formula-input{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.formula-input div{
+    bottom: 0;
+    right: 0;
+    height: fit-content;
+    position: absolute;
+}
+
+.formula-input ion-item{
+    width: calc(100% - 3rem);
+}
+
+.formula-input ion-icon{
+    font-size:20px;
+}

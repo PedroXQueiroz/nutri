@@ -9,10 +9,10 @@ export class PesoExcesso extends Formula{
     }
 
     @param('Peso Tecido Gorduroso', ParamType.NUMERAL)
-    public peso:number = 0;
+    public peso:number = null;
     
     @param('Peso Ideal', ParamType.NUMERAL)
-    public pesoIdeal:number = 0;
+    public pesoIdeal:number = null;
     
     public calculate(): number {
         return this.peso - this.pesoIdeal;

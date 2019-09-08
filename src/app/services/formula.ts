@@ -48,12 +48,28 @@ export default abstract class Formula{
             .forEach(prop => {
                 let currentParamName:ParamMetaData = Reflect.getMetadata(paramMetadataKey, this, prop);
 
-                console.log(param, value);
-
                 if(currentParamName && currentParamName.name == param.name){
-                    this[prop] = param.type == ParamType.GENDER.toString() ? Gender[value] : Number(value);
-                    console.log(this[prop]);
+                    
+                    if(value){
+                        this[prop] = param.type == ParamType.GENDER.toString() ? Gender[value] : Number(value);                 
+                    }else{
+                        this[prop] = null;
+                    }
+
                 }
             })
     }
+
+    getParamValue(param:ParamMetaData):Number{
+
+        let formulaProps:string[] = Object.keys(this);
+
+        let paramName:string = formulaProps.find(prop => {
+            let currentParamName:ParamMetaData = Reflect.getMetadata(paramMetadataKey, this, prop);
+
+            return currentParamName && currentParamName.name == param.name                
+        });
+
+        return this[paramName];
+    }   
 };

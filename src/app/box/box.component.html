@@ -1,0 +1,42 @@
+<div style="
+        border: 1px solid #777777;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        color: #444444;
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+        height:fit-content;">
+  
+  <h2>{{title}}</h2>
+
+  <div  
+      *ngFor="let col of columns"
+      style="
+          display: flex;
+          flex-flow: column;
+          width:100%;
+        ">
+
+    <div
+      *ngFor="let item of col.items"
+      style="
+          display: flex;
+          flex-flow: row;
+          justify-content: start;
+          padding:0.25rem;
+        "
+      >
+      <span
+      style="
+          font-weight: bold;
+          min-width:6rem;
+        ">
+        {{item.name}}:
+      </span>
+      <span>{{item.value}}</span>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,14 @@
+.value-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.value-container div{
+    display: flex;
+    flex-flow: column;
+}
+
+.value-container ion-icon{
+    font-size: 25px;
+}

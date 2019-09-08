@@ -7,20 +7,16 @@ export default class FormulaIMC extends Formula {
     
     constructor(){
         super('IMC', 'Índice de massa corporal');
-
-        this.weight = 0;
-        this.height = 0;
-        this.gender = Gender.MALE;
     }
     
     @param('peso', ParamType.NUMERAL)
-    public weight:number;
+    public weight:number = null;
 
     @param('altura', ParamType.NUMERAL)
-    public height:number;
+    public height:number = null;
 
     @param('gênero', ParamType.GENDER)
-    public gender:Gender;
+    public gender:Gender = null;
     
     public calculate(): number {
         return this.weight / (this.height * this.height);
